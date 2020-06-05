@@ -4,13 +4,14 @@ import pandas as pd
 import time
 
 
+
 def init_browser():
     # Replace the path with your actual path to the chromedriver
-    executable_path = {"executable_path": 'chromedriver'}
+    executable_path = {"executable_path": 'C:/Users/nleop/Documents/Data_Bootcamp/chromedriver'}
     return Browser("chrome", **executable_path, headless=False)
 
 
-def scrap():
+def scrape():
 
     # # NASA Mars News
 
@@ -35,6 +36,8 @@ def scrap():
     news_p = article.find("div", class_ ="article_teaser_body").text
 
 
+    print(news_title)
+    print(news_p)
 
 
     # # JPL Mars Space Images - Featured Image
@@ -55,6 +58,7 @@ def scrap():
 
     featured_image_url = "https://www.jpl.nasa.gov" + image
 
+    print(featured_image_url)
 
 
     # # Mars Weather
@@ -87,6 +91,7 @@ def scrap():
 
     mars_weather = div_2.find("span", attrs = {"class":"css-901oao css-16my406 r-1qd0xha r-ad9z0x r-bcqeeo r-qvutc0"}).text
 
+    print(mars_weather)
 
 
     # # Mars Facts
@@ -100,6 +105,7 @@ def scrap():
 
     #read the table on the website using pandas
     tables = pd.read_html(mars_facts_url)
+    tables
 
 
     #making sure it is a list
@@ -127,6 +133,7 @@ def scrap():
 
     #use to_html to change the df into an html table
     html_table = df.to_html()
+    html_table
 
 
 
@@ -134,9 +141,7 @@ def scrap():
     html_table.replace('\n', '')
 
 
-
     #save table to a file
-    df.to_html('table.html')
     mars_facts = df.to_html('table.html')
 
 
@@ -193,22 +198,35 @@ def scrap():
         hemisphere_image_urls.append({'title': title, "img_url": img_url})
         
 
+    #disply the dictionary
+    hemisphere_image_urls
+
+
 
     # Create empty dictionary for all Mars Data.
-    mars_data = {}
+    mars_facts_data = {
+        "news_title": news_title,
+        "news_paragraph": news_p,
+        "featured_image_url" : featured_image_url,
+        "mars_weather": mars_weather,
+        "mars_facts": mars_facts,
+        "hemisphere_image_urls": hemisphere_image_urls
+    }
 
     # Append news_title and news_paragraph to mars_data.
-    mars_data['news_title'] = news_title
-    mars_data['news_paragraph'] = news_p
+    mars_facts_data['news_title'] = news_title
+    mars_facts_data['news_paragraph'] = news_p
 
     # Append featured_image_url to mars_data.
-    mars_data['featured_image_url'] = featured_image_url
+    mars_facts_data['featured_image_url'] = featured_image_url
 
     # Append mars_weather to mars_data.
-    mars_data['mars_weather'] = mars_weather
+    mars_facts_data['mars_weather'] = mars_weather
 
     # Append mars_facts to mars_data.
-    mars_data['mars_facts'] = mars_facts
+    mars_facts_data['mars_facts'] = mars_facts
 
     # Append hemisphere_image_urls to mars_data.
-    mars_data['hemisphere_image_urls'] = hemisphere_image_urls
+    mars_facts_data['hemisphere_image_urls'] = hemisphere_image_urls
+
+    return mars_facts_data
