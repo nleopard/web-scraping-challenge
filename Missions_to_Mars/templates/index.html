@@ -15,15 +15,78 @@
             <h1>Mission to Mars</h1>
             <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data!</a></p>
         </div>
-        <h2>Latest Mars News:</h2>
-        <h3>{{mars_facts.news_title}}</h3>
-        <h3>{{mars_facts.news_p}}</h3>
-        <h3>{{mars_facts.featured_image_url}}</h3>
-        <h3>{{mars_facts.mars_weather}}</h3>
-        <h3>{{mars_facts.mars_facts}}</h3>
-        <h3>{{mars_facts.hemisphere_image_urls}}</h3>
+
     </div>
+
+    <!-- Lastest Mars News -->
+    <h3 style="padding-left: 50px; padding-top: 50px; margin-top: 100px; text-align: left;">Latest Mars News</h3>
+    <div class="card-deck">
+        <hr>
+        <div class="col-md-12">
+            <div class="row" style="padding-left: 50px; text-align: left;">
+
+                <h4><b>{{mars_facts_data.news_title}}</b></h4>
+                <h5>{{mars_facts_data.news_p}}</h5>
+
+            </div>
+        </div>
     </div>
+
+    <!-- Featured Image -->
+    <div class="container">
+        <div class="row">
+            <!-- Left Image-->
+            <div class="col-lg-8 col-md-8 col-sm-12">
+                <h3>Featured Mars Image</h3>
+                <img src="{{ mars_facts_data.featured_image_url }}" style="max-width:100%; max-height: auto;" alt="Mars Featured Image">
+            </div>
+
+            <!-- Weather Card -->
+            <div class="col-lg-4 col-md-4 col-sm-12">
+
+                <!--
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body text-white bg-dark">
+                        <h3 class="card-title">Current Weather on Mars</h3>
+                        <p class="card-text">{{ mars_facts_data.mars_weather }}</p>
+                    </div>
+
+                </div>
+                -->
+
+                <!-- Table -->
+                <br>
+                <h3>Mars Facts</h3>
+                <div style="max-width: 450px; max-height: 150px; font-size: 15px; margin-bottom: 65px;">
+                    {{ mars_facts_data.mars_facts|safe}}
+                </div>
+            </div>
+            <!-- col4 -->
+        </div>
+        <!-- Row -->
+    </div>
+    <!-- Container -->
+
+
+    <!-- Mars Hemisphere -->
+    <h3 style="padding-top: 50px; margin-top: 100px; text-align: center;">Mars Hemispheres</h3>
+    <div class="card-deck">
+        <hr>
+        <div class="container">
+            <div class="row">
+                {% for item in mars_facts_data.hemisphere_image_urls %}
+                <div class="col-1">
+                    <img class="card-img-top" src="{{ item.img_url }}" />
+                    <div class="card-body">
+                        <p class="card-text">{{ item.title }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- Close main container -->
+
 </body>
 
 </html>
