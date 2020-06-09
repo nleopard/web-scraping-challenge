@@ -8,7 +8,7 @@ import lxml
 
 def init_browser():
     # Replace the path with your actual path to the chromedriver
-    executable_path = {"executable_path": 'C:/Users/nleop/Documents/Data_Bootcamp/chromedriver'}
+    executable_path = {"executable_path": 'chromedriver'}
     return Browser("chrome", **executable_path, headless=False)
 
 
@@ -66,28 +66,28 @@ def scrape():
 
 
     #save the mars twitter website in a variable
-    #mars_twitter_url = "https://twitter.com/marswxreport?lang=en"
+    mars_twitter_url = "https://twitter.com/marswxreport?lang=en"
         
     #pull up the website to pull information
-    #browser.visit(mars_twitter_url)
-    #time.sleep(1)
+    browser.visit(mars_twitter_url)
+    time.sleep(1)
 
     #read the html website
-    #html_twitter = browser.html
-    #soup = BeautifulSoup(html_twitter, "html.parser")
+    html_twitter = browser.html
+    soup = BeautifulSoup(html_twitter, "html.parser")
 
 
     #work through the different sections to find our tweet
 
-    #main = soup.find("main", attrs = {"role":"main","class":"css-1dbjc4n r-16y2uox r-1wbh5a2"})
+    main = soup.find("main", attrs = {"role":"main","class":"css-1dbjc4n r-16y2uox r-1wbh5a2"})
 
-    #div = main.find("div", attrs = {"class":"css-1dbjc4n r-14lw9ot r-1tlfku8 r-1ljd8xs r-13l2t4g r-1phboty r-1jgb5lz r-1ye8kvj r-13qz1uu r-184en5c"})
+    div = main.find("div", attrs = {"class":"css-1dbjc4n r-14lw9ot r-1tlfku8 r-1ljd8xs r-13l2t4g r-1phboty r-1jgb5lz r-1ye8kvj r-13qz1uu r-184en5c"})
 
-    #article = div.find("article", attrs = {"role":"article","class":"css-1dbjc4n r-1loqt21 r-16y2uox r-1wbh5a2 r-1ny4l3l r-1udh08x r-1j3t67a r-o7ynqc r-6416eg"})
+    article = div.find("article", attrs = {"role":"article","class":"css-1dbjc4n r-1loqt21 r-16y2uox r-1wbh5a2 r-1ny4l3l r-1udh08x r-1j3t67a r-o7ynqc r-6416eg"})
 
-    #div_2 = article.find("div", attrs = {"dir":"auto","class":"css-901oao r-hkyrab r-1qd0xha r-a023e6 r-16dba41 r-ad9z0x r-bcqeeo r-bnwqim r-qvutc0"})
+    div_2 = article.find("div", attrs = {"dir":"auto","class":"css-901oao r-hkyrab r-1qd0xha r-a023e6 r-16dba41 r-ad9z0x r-bcqeeo r-bnwqim r-qvutc0"})
 
-    #mars_weather = div_2.find("span", attrs = {"class":"css-901oao css-16my406 r-1qd0xha r-ad9z0x r-bcqeeo r-qvutc0"}).text
+    mars_weather = div_2.find("span", attrs = {"class":"css-901oao css-16my406 r-1qd0xha r-ad9z0x r-bcqeeo r-qvutc0"}).text
 
     #print(mars_weather)
 
@@ -188,7 +188,7 @@ def scrape():
     mars_facts_data['featured_image_url'] = featured_image_url
 
     # Append mars_weather to mars_data.
-    #mars_facts_data['mars_weather'] = mars_weather
+    mars_facts_data['mars_weather'] = mars_weather
 
     # Append mars_facts to mars_data.
     mars_facts_data['mars_facts'] = data
